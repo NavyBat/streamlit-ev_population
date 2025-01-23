@@ -17,7 +17,7 @@ if 'Base MSRP' in data.columns:
 
 st.write("""
 # EV Population Analysis App
-This app analyzes and predicts **Electric Vehicle Population Trends**!
+This app analyzes and predicts *Electric Vehicle Population Trends*!
 """)
 
 st.sidebar.header('User Input Parameters')
@@ -112,7 +112,7 @@ df = df.reindex(columns=X_train.columns, fill_value=0)  # Ensure input data matc
 try:
     prediction = model.predict(df)
     st.subheader('Prediction for User Input')
-    st.write(f"The predicted Electric Range for the provided input is: **{prediction[0]:.2f} km**")
+    st.write(f"The predicted Electric Range for the provided input is: *{prediction[0]:.2f} km*")
 except ValueError as e:
     st.error(f"Error in prediction: {e}")
-    st.warning("Please check your inputs and ensure they match the dataset values.")
+    st.warning("Please check your inputs and ensure they match the dataset values.")
