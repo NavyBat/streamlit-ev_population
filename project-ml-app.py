@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.preprocessing import LabelEncoder
@@ -114,18 +113,6 @@ try:
     prediction = model.predict(df)
     st.subheader('Prediction for User Input')
     st.write(f"The predicted Electric Range for the provided input is: *{prediction[0]:.2f} km*")
-
-    # Add graphs after prediction
-    st.subheader("Feature Importance")
-
-    # Feature Importance Bar Chart
-    feature_importances = model.feature_importances_
-    feature_names = X_train.columns
-    importance_df = pd.DataFrame({'Feature': feature_names, 'Importance': feature_importances})
-    importance_df = importance_df.sort_values(by='Importance', ascending=False)
-
-    st.bar_chart(importance_df.set_index('Feature'))
-
 except ValueError as e:
     st.error(f"Error in prediction: {e}")
-    st.warning("Please check your inputs and ensure they match the dataset values.")
+    st.warning("Please check your inputs and ensure they match the dataset values.")
