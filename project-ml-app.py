@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
@@ -126,27 +125,22 @@ try:
     importance_df = importance_df.sort_values(by='Importance', ascending=False)
 
     st.write("### Feature Importance")
-    fig, ax = plt.subplots(figsize=(8, 6))
-    sns.barplot(x='Importance', y='Feature', data=importance_df, ax=ax, palette='viridis')
-    ax.set_title('Feature Importance')
-    st.pyplot(fig)
+    st.bar_chart(importance_df.set_index('Feature'))
 
     # Distribution of Electric Range
     st.write("### Distribution of Electric Range")
-    fig, ax = plt.subplots(figsize=(8, 6))
-    sns.histplot(data['Electric Range'], kde=True, color='blue', ax=ax)
-    ax.set_title('Distribution of Electric Range')
-    st.pyplot(fig)
+    dist_fig = sns.histplot(data['Electric Range'], kde=True, color='blue')
+    dist_fig.set_title('Distribution of Electric Range')
+    st.pyplot(dist_fig.figure)
 
     # Scatter Plot: Electric Range vs. User's Selected Feature (e.g., Model Year)
     if 'Model Year' in data.columns:
         st.write("### Electric Range vs. Model Year")
-        fig, ax = plt.subplots(figsize=(8, 6))
-        sns.scatterplot(x=data['Model Year'], y=data['Electric Range'], alpha=0.7, ax=ax)
-        ax.set_title('Electric Range vs. Model Year')
-        ax.set_xlabel('Model Year')
-        ax.set_ylabel('Electric Range (km)')
-        st.pyplot(fig)
+        scatter_fig = sns.scatterplot(x=data['Model Year'], y=data['Electric Range'], alpha=0.7)
+        scatter_fig.set_title('Electric Range vs. Model Year')
+        scatter_fig.set_xlabel('Model Year')
+        scatter_fig.set_ylabel('Electric Range (km)')
+        st.pyplot(scatter_fig.figure)
 
 except ValueError as e:
     st.error(f"Error in prediction: {e}")
